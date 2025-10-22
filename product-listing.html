@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shine Books - Danh Mục Sách</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+        :root {
+            --shine-orange: #F97316;
+            --shine-orange-dark: #EA580C;
+        }
+        .bg-primary { background-color: var(--shine-orange); }
+        .bg-primary-dark { background-color: var(--shine-orange-dark); }
+        .text-primary { color: var(--shine-orange); }
+        .border-primary { border-color: var(--shine-orange); }
+        .ring-primary { --tw-ring-color: var(--shine-orange); }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header (Reused from index.html for consistency) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+             <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-3xl font-extrabold text-primary">Shine Books</a>
+                <div class="hidden lg:flex w-full max-w-xl mx-4">
+                    <input type="text" placeholder="Tìm kiếm sách bạn muốn..." class="w-full border border-slate-300 rounded-l-md px-4 py-2 focus:ring-2 focus:ring-orange-300 focus:border-primary outline-none transition">
+                    <button class="bg-primary hover:bg-primary-dark text-white font-bold px-6 py-2 rounded-r-md transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="login.html" class="flex flex-col items-center text-slate-600 hover:text-primary transition">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                        <span class="hidden md:block text-xs mt-1">Tài khoản</span>
+                    </a>
+                    <a href="cart.html" class="flex flex-col items-center text-slate-600 hover:text-primary transition relative">
+                         <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        <span class="hidden md:block text-xs mt-1">Giỏ hàng</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Breadcrumbs and Title -->
+        <div class="mb-6">
+            <nav class="text-sm text-slate-500">
+                <a href="index.html" class="hover:text-primary">Trang chủ</a>
+                <span class="mx-2">/</span>
+                <span id="category-name" class="font-semibold text-slate-700">Danh mục</span>
+            </nav>
+            <h1 id="page-title" class="text-3xl md:text-4xl font-bold text-slate-800 mt-2">Sách</h1>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar for Filters -->
+            <aside class="w-full lg:w-1/4">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-4 border-b pb-2">Bộ Lọc</h3>
+                    <!-- Filter by Price -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Giá</h4>
+                        <div class="space-y-2">
+                            <div><input type="radio" id="price1" name="price" class="mr-2 text-primary focus:ring-primary"><label for="price1">Dưới 100.000đ</label></div>
+                            <div><input type="radio" id="price2" name="price" class="mr-2 text-primary focus:ring-primary"><label for="price2">100.000đ - 200.000đ</label></div>
+                            <div><input type="radio" id="price3" name="price" class="mr-2 text-primary focus:ring-primary"><label for="price3">Trên 200.000đ</label></div>
+                        </div>
+                    </div>
+                    <!-- Filter by Author -->
+                    <div>
+                        <h4 class="font-semibold mb-3">Tác giả</h4>
+                         <div class="space-y-2">
+                            <div><input type="checkbox" id="author1" class="mr-2 rounded text-primary focus:ring-primary"><label for="author1">Nguyễn Nhật Ánh</label></div>
+                            <div><input type="checkbox" id="author2" class="mr-2 rounded text-primary focus:ring-primary"><label for="author2">Dale Carnegie</label></div>
+                            <div><input type="checkbox" id="author3" class="mr-2 rounded text-primary focus:ring-primary"><label for="author3">Haruki Murakami</label></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <section class="w-full lg:w-3/4">
+                <!-- Sorting Options -->
+                <div class="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center mb-6">
+                    <span class="text-slate-600">Hiển thị 12 trên 48 sản phẩm</span>
+                    <div>
+                        <label for="sort" class="mr-2">Sắp xếp theo:</label>
+                        <select id="sort" class="rounded-md border-slate-300 focus:ring-primary focus:border-primary">
+                            <option>Mới nhất</option>
+                            <option>Giá: Thấp đến cao</option>
+                            <option>Giá: Cao đến thấp</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Product items will be inserted here by JS -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav class="flex items-center space-x-2">
+                        <a href="#" class="px-4 py-2 bg-white rounded-md text-slate-600 hover:bg-slate-100">&laquo;</a>
+                        <a href="#" class="px-4 py-2 bg-primary text-white rounded-md">1</a>
+                        <a href="#" class="px-4 py-2 bg-white rounded-md text-slate-600 hover:bg-slate-100">2</a>
+                        <a href="#" class="px-4 py-2 bg-white rounded-md text-slate-600 hover:bg-slate-100">3</a>
+                        <a href="#" class="px-4 py-2 bg-white rounded-md text-slate-600 hover:bg-slate-100">&raquo;</a>
+                    </nav>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12 text-center">
+            <p>&copy; 2025 Shine Books. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'Tất cả sách';
+
+            document.getElementById('category-name').textContent = category;
+            document.getElementById('page-title').textContent = `Sách ${category}`;
+            document.title = `Shine Books - ${category}`;
+            
+            const allBooks = [
+                { title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', price: '79.000', old_price: '99.000', discount: 20, img: 'https://placehold.co/400x600/F97316/FFFFFF?text=Dac+Nhan+Tam' },
+                { title: 'Nhà Giả Kim', author: 'Paulo Coelho', price: '69.000', old_price: '86.000', discount: 20, img: 'https://placehold.co/400x600/3B82F6/FFFFFF?text=Nha+Gia+Kim' },
+                { title: 'Muôn Kiếp Nhân Sinh', author: 'Nguyên Phong', price: '125.000', old_price: '169.000', discount: 26, img: 'https://placehold.co/400x600/6366F1/FFFFFF?text=Muon+Kiep' },
+                { title: 'Hoàng Tử Bé', author: 'Antoine de Saint-Exupéry', price: '50.000', old_price: '65.000', discount: 23, img: 'https://placehold.co/400x600/EC4899/FFFFFF?text=Hoang+Tu+Be' },
+                { title: 'Atomic Habits', author: 'James Clear', price: '139.000', old_price: '179.000', discount: 22, img: 'https://placehold.co/400x600/84CC16/FFFFFF?text=Atomic+Habits' },
+                { title: 'Tội Ác và Hình Phạt', author: 'Fyodor Dostoevsky', price: '150.000', old_price: '180.000', discount: 17, img: 'https://placehold.co/400x600/10B981/FFFFFF?text=Toi+Ac' },
+                { title: 'Rừng Na Uy', author: 'Haruki Murakami', price: '129.000', old_price: '160.000', discount: 19, img: 'https://placehold.co/400x600/059669/FFFFFF?text=Rung+Na+Uy' },
+                { title: 'Kính Vạn Hoa', author: 'Nguyễn Nhật Ánh', price: '89.000', old_price: '110.000', discount: 19, img: 'https://placehold.co/400x600/4F46E5/FFFFFF?text=Kinh+Van+Hoa' },
+            ];
+
+            const grid = document.getElementById('product-grid');
+            let gridHtml = '';
+            allBooks.forEach(book => {
+                gridHtml += `
+                    <a href="product-detail.html" class="block">
+                        <div class="group bg-white rounded-lg shadow-sm overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-primary">
+                            <div class="relative">
+                                <img src="${book.img}" alt="${book.title}" class="w-full h-64 object-cover">
+                                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-${book.discount}%</div>
+                            </div>
+                            <div class="p-4 flex flex-col flex-grow">
+                                <h3 class="font-semibold text-slate-800 text-base leading-tight h-10 overflow-hidden">${book.title}</h3>
+                                <p class="text-sm text-slate-500 mt-1 flex-grow">${book.author}</p>
+                                <div class="mt-3">
+                                    <span class="text-lg font-bold text-primary">${book.price}đ</span>
+                                    <span class="text-sm text-slate-400 line-through ml-2">${book.old_price}đ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
+            grid.innerHTML = gridHtml;
+        });
+    </script>
+
+</body>
+</html>
+

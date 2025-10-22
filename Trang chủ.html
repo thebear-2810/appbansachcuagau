@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shine Books - Nhà Sách Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+        :root {
+            --shine-orange: #F97316; /* Tailwind orange-500 */
+            --shine-orange-dark: #EA580C; /* Tailwind orange-600 */
+            --shine-orange-light: #FB923C; /* Tailwind orange-400 */
+        }
+        .bg-primary { background-color: var(--shine-orange); }
+        .bg-primary-dark { background-color: var(--shine-orange-dark); }
+        .text-primary { color: var(--shine-orange); }
+        .border-primary { border-color: var(--shine-orange); }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .mega-menu {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .group:hover .mega-menu {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <!-- Top bar -->
+            <div class="hidden md:flex justify-end items-center text-xs text-slate-600 py-1 border-b border-slate-200">
+                <a href="#" class="hover:text-primary transition">Hệ thống nhà sách</a>
+                <span class="mx-2">|</span>
+                <a href="#" class="hover:text-primary transition">Hỗ trợ</a>
+            </div>
+
+            <!-- Main header -->
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <a href="index.html" class="text-3xl font-extrabold text-primary">
+                    Shine Books
+                </a>
+
+                <!-- Search bar -->
+                <div class="hidden lg:flex w-full max-w-xl mx-4">
+                    <input type="text" placeholder="Tìm kiếm sách bạn muốn..." class="w-full border border-slate-300 rounded-l-md px-4 py-2 focus:ring-2 focus:ring-orange-300 focus:border-primary outline-none transition">
+                    <button class="bg-primary hover:bg-primary-dark text-white font-bold px-6 py-2 rounded-r-md transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- User actions -->
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <a href="login.html" class="flex flex-col items-center text-slate-600 hover:text-primary transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span class="hidden md:block text-xs mt-1">Tài khoản</span>
+                    </a>
+                    <a href="cart.html" class="flex flex-col items-center text-slate-600 hover:text-primary transition relative">
+                         <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="hidden md:block text-xs mt-1">Giỏ hàng</span>
+                    </a>
+                    <button id="mobile-menu-button" class="lg:hidden text-slate-600 hover:text-primary transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+             <!-- Navigation -->
+            <nav class="hidden lg:flex bg-primary text-white relative">
+                <div class="container mx-auto px-4 flex items-center">
+                    <div class="group">
+                         <div class="py-3 px-4 bg-primary-dark cursor-pointer flex items-center">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            Danh mục sách
+                        </div>
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-0 w-full bg-white shadow-lg border-t border-slate-200">
+                           <div class="container mx-auto px-4 grid grid-cols-4 gap-8 py-6">
+                               <div>
+                                   <h3 class="font-bold text-slate-800 border-b-2 border-primary pb-2 mb-3">Văn Học</h3>
+                                   <ul class="space-y-2 text-slate-600">
+                                       <li><a href="product-listing.html?category=Tiểu thuyết" class="hover:text-primary transition">Tiểu thuyết</a></li>
+                                       <li><a href="product-listing.html?category=Truyện ngắn" class="hover:text-primary transition">Truyện ngắn</a></li>
+                                       <li><a href="product-listing.html?category=Thơ" class="hover:text-primary transition">Thơ</a></li>
+                                   </ul>
+                               </div>
+                               <div>
+                                   <h3 class="font-bold text-slate-800 border-b-2 border-primary pb-2 mb-3">Kinh Tế</h3>
+                                   <ul class="space-y-2 text-slate-600">
+                                       <li><a href="product-listing.html?category=Quản trị" class="hover:text-primary transition">Quản trị - Lãnh đạo</a></li>
+                                       <li><a href="product-listing.html?category=Marketing" class="hover:text-primary transition">Marketing</a></li>
+                                       <li><a href="product-listing.html?category=Đầu tư" class="hover:text-primary transition">Đầu tư</a></li>
+                                   </ul>
+                               </div>
+                               <div>
+                                   <h3 class="font-bold text-slate-800 border-b-2 border-primary pb-2 mb-3">Kỹ Năng Sống</h3>
+                                   <ul class="space-y-2 text-slate-600">
+                                       <li><a href="product-listing.html?category=Phát triển bản thân" class="hover:text-primary transition">Phát triển bản thân</a></li>
+                                       <li><a href="product-listing.html?category=Giao tiếp" class="hover:text-primary transition">Kỹ năng giao tiếp</a></li>
+                                   </ul>
+                               </div>
+                               <div>
+                                   <h3 class="font-bold text-slate-800 border-b-2 border-primary pb-2 mb-3">Sách Thiếu Nhi</h3>
+                                   <ul class="space-y-2 text-slate-600">
+                                       <li><a href="product-listing.html?category=Truyện cổ tích" class="hover:text-primary transition">Truyện cổ tích</a></li>
+                                       <li><a href="product-listing.html?category=Manga - Comic" class="hover:text-primary transition">Manga - Comic</a></li>
+                                   </ul>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                    <a href="product-listing.html?category=Sách Bán Chạy" class="py-3 px-4 hover:bg-primary-dark transition">Sách Bán Chạy</a>
+                    <a href="product-listing.html?category=Sách Mới" class="py-3 px-4 hover:bg-primary-dark transition">Sách Mới</a>
+                    <a href="product-listing.html?category=Khuyến Mãi" class="py-3 px-4 hover:bg-primary-dark transition">Khuyến Mãi</a>
+                    <a href="#" class="py-3 px-4 hover:bg-primary-dark transition">Tin Tức</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white p-4">
+             <div class="relative mb-4">
+                <input type="text" placeholder="Tìm kiếm sách..." class="w-full border border-slate-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-orange-300 focus:border-primary outline-none transition">
+             </div>
+             <a href="product-listing.html?category=Sách Bán Chạy" class="block py-2 text-slate-700 hover:bg-orange-100 rounded">Sách Bán Chạy</a>
+             <a href="product-listing.html?category=Sách Mới" class="block py-2 text-slate-700 hover:bg-orange-100 rounded">Sách Mới</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Banner -->
+        <section class="mb-12">
+            <div class="bg-orange-200 rounded-lg p-8 md:p-12 flex items-center" style="background-image: url('https://placehold.co/1200x400/FDBA74/A16207?text=Shine+Your+Mind'); background-size: cover; background-position: center;">
+                <div class="max-w-md">
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800">Mở Sách Ra, Tương Lai Sáng</h1>
+                    <p class="mt-4 text-slate-700">Khám phá hàng ngàn đầu sách hay với ưu đãi cực lớn chỉ có tại Shine Books.</p>
+                    <a href="product-listing.html?category=Khuyến Mãi" class="mt-6 inline-block bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">
+                        Khám Phá Ngay
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Promo Banners -->
+        <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="#" class="rounded-lg overflow-hidden relative block">
+                <img src="https://placehold.co/600x250/FB923C/431407?text=Free+Ship+Don+Tu+150k" alt="Free Ship" class="w-full h-full object-cover">
+            </a>
+            <a href="product-listing.html?category=Sách Mới" class="rounded-lg overflow-hidden relative block">
+                <img src="https://placehold.co/600x250/FDBA74/431407?text=Sach+Moi+-+Giam+25%25" alt="New Books Sale" class="w-full h-full object-cover">
+            </a>
+        </section>
+        
+        <!-- Flash Sale -->
+        <section class="mb-12 bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-red-500 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                    </svg>
+                    FLASH SALE
+                </h2>
+                <div class="flex items-center space-x-2 text-slate-800">
+                    <span>Kết thúc trong</span>
+                    <div id="countdown" class="flex space-x-1">
+                        <span id="hours" class="bg-slate-800 text-white font-bold p-2 rounded-md">00</span>
+                        <span class="font-bold">:</span>
+                        <span id="minutes" class="bg-slate-800 text-white font-bold p-2 rounded-md">00</span>
+                        <span class="font-bold">:</span>
+                        <span id="seconds" class="bg-slate-800 text-white font-bold p-2 rounded-md">00</span>
+                    </div>
+                </div>
+            </div>
+             <div id="flash-sale-books" class="flex overflow-x-auto -mx-2 hide-scrollbar">
+                <!-- Flash sale books will be inserted here by JS -->
+            </div>
+        </section>
+
+        <!-- Book Section Template -->
+        <div id="book-section-template" class="hidden">
+             <a href="product-detail.html" class="flex-none w-48 md:w-56 p-2 block">
+                <div class="group bg-white rounded-lg shadow-sm overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-primary">
+                    <div class="relative">
+                        <img src="BOOK_IMAGE" alt="BOOK_TITLE" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-BOOK_DISCOUNT%</div>
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h3 class="font-semibold text-slate-800 text-base leading-tight h-10 overflow-hidden">BOOK_TITLE</h3>
+                        <p class="text-sm text-slate-500 mt-1 flex-grow">BOOK_AUTHOR</p>
+                        <div class="mt-3">
+                            <span class="text-lg font-bold text-primary">BOOK_PRICEđ</span>
+                            <span class="text-sm text-slate-400 line-through ml-2">BOOK_OLD_PRICEđ</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Sách Bán Chạy -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 border-l-4 border-primary pl-4">Sách Bán Chạy</h2>
+            <div id="bestsellers" class="flex overflow-x-auto -mx-2 hide-scrollbar"></div>
+        </section>
+
+        <!-- Sách Mới Phát Hành -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 border-l-4 border-primary pl-4">Sách Mới Phát Hành</h2>
+            <div id="new-releases" class="flex overflow-x-auto -mx-2 hide-scrollbar"></div>
+        </section>
+        
+        <!-- Sách Văn Học -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 border-l-4 border-primary pl-4">Văn Học</h2>
+            <div id="literature-books" class="flex overflow-x-auto -mx-2 hide-scrollbar"></div>
+        </section>
+
+        <!-- Sách Thiếu Nhi -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 border-l-4 border-primary pl-4">Sách Thiếu Nhi</h2>
+            <div id="kids-books" class="flex overflow-x-auto -mx-2 hide-scrollbar"></div>
+        </section>
+
+        <!-- Tin Tức -->
+        <section>
+             <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6 border-l-4 border-primary pl-4">Tin Tức Shine Books</h2>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden group">
+                    <a href="#" class="block">
+                        <img src="https://placehold.co/600x400/F97316/FFFFFF?text=Review+Sach" alt="News 1" class="w-full h-48 object-cover group-hover:opacity-80 transition">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-slate-800"><a href="#" class="hover:text-primary">Review sách: Hành trình của những tâm hồn đồng điệu</a></h3>
+                        <p class="text-sm text-slate-500 mt-2">Khám phá những cuốn sách mới nhất và tìm thấy câu chuyện của riêng bạn...</p>
+                        <a href="#" class="text-sm text-primary font-semibold mt-4 inline-block">Đọc thêm &rarr;</a>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-lg shadow-sm overflow-hidden group">
+                    <a href="#" class="block">
+                        <img src="https://placehold.co/600x400/FB923C/FFFFFF?text=Tac+Gia" alt="News 2" class="w-full h-48 object-cover group-hover:opacity-80 transition">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-slate-800"><a href="#" class="hover:text-primary">Gặp gỡ tác giả: Cuộc trò chuyện đầy cảm hứng</a></h3>
+                        <p class="text-sm text-slate-500 mt-2">Lắng nghe những chia sẻ thú vị từ các tác giả được yêu thích nhất...</p>
+                        <a href="#" class="text-sm text-primary font-semibold mt-4 inline-block">Đọc thêm &rarr;</a>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-lg shadow-sm overflow-hidden group">
+                    <a href="#" class="block">
+                        <img src="https://placehold.co/600x400/FDBA74/FFFFFF?text=Su+Kien" alt="News 3" class="w-full h-48 object-cover group-hover:opacity-80 transition">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-slate-800"><a href="#" class="hover:text-primary">Sự kiện ra mắt sách mới tháng 10</a></h3>
+                        <p class="text-sm text-slate-500 mt-2">Đừng bỏ lỡ cơ hội sở hữu những ấn phẩm đặc biệt và quà tặng hấp dẫn...</p>
+                        <a href="#" class="text-sm text-primary font-semibold mt-4 inline-block">Đọc thêm &rarr;</a>
+                    </div>
+                </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Shine Books</h3>
+                    <p class="text-slate-300">Nơi tri thức tỏa sáng. Chúng tôi cam kết mang đến cho bạn những cuốn sách hay nhất với chất lượng và dịch vụ hàng đầu.</p>
+                </div>
+                <!-- Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Về Chúng Tôi</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="#" class="hover:text-primary transition">Giới thiệu</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Tuyển dụng</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Hệ thống nhà sách</a></li>
+                    </ul>
+                </div>
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Hỗ Trợ Khách Hàng</h4>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><a href="#" class="hover:text-primary transition">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kết Nối Với Chúng Tôi</h4>
+                    <p class="text-slate-300 mb-4">Đăng ký để nhận thông tin và khuyến mãi mới nhất.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email của bạn" class="w-full rounded-l-md px-3 py-2 text-slate-800 outline-none">
+                        <button class="bg-primary hover:bg-primary-dark text-white font-bold px-4 py-2 rounded-r-md">Đăng ký</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-700 pt-8 text-center text-slate-400 text-sm">
+                <p>&copy; 2025 Shine Books. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top" class="hidden fixed bottom-8 right-8 bg-primary hover:bg-primary-dark text-white p-3 rounded-full shadow-lg transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Mock data for books
+            const books = {
+                flashSale: [
+                    { title: 'Tư Duy Nhanh và Chậm', author: 'Daniel Kahneman', price: '159.000', old_price: '220.000', discount: 28, img: 'https://placehold.co/400x600/0EA5E9/FFFFFF?text=Tu+Duy' },
+                    { title: 'Sapiens: Lược Sử Loài Người', author: 'Yuval Noah Harari', price: '179.000', old_price: '250.000', discount: 28, img: 'https://placehold.co/400x600/22C55E/FFFFFF?text=Sapiens' },
+                    { title: '7 Thói Quen Hiệu Quả', author: 'Stephen R. Covey', price: '99.000', old_price: '150.000', discount: 34, img: 'https://placehold.co/400x600/D946EF/FFFFFF?text=7+Thoi+Quen' },
+                    { title: 'Bố Già', author: 'Mario Puzo', price: '119.000', old_price: '170.000', discount: 30, img: 'https://placehold.co/400x600/8B5CF6/FFFFFF?text=Bo+Gia' },
+                ],
+                bestsellers: [
+                    { title: 'Đắc Nhân Tâm', author: 'Dale Carnegie', price: '79.000', old_price: '99.000', discount: 20, img: 'https://placehold.co/400x600/F97316/FFFFFF?text=Dac+Nhan+Tam' },
+                    { title: 'Nhà Giả Kim', author: 'Paulo Coelho', price: '69.000', old_price: '86.000', discount: 20, img: 'https://placehold.co/400x600/3B82F6/FFFFFF?text=Nha+Gia+Kim' },
+                    { title: 'Muôn Kiếp Nhân Sinh', author: 'Nguyên Phong', price: '125.000', old_price: '169.000', discount: 26, img: 'https://placehold.co/400x600/6366F1/FFFFFF?text=Muon+Kiep' },
+                    { title: 'Hoàng Tử Bé', author: 'Antoine de Saint-Exupéry', price: '50.000', old_price: '65.000', discount: 23, img: 'https://placehold.co/400x600/EC4899/FFFFFF?text=Hoang+Tu+Be' },
+                    { title: 'Atomic Habits', author: 'James Clear', price: '139.000', old_price: '179.000', discount: 22, img: 'https://placehold.co/400x600/84CC16/FFFFFF?text=Atomic+Habits' },
+                ],
+                newReleases: [
+                    { title: 'Gen Z - Thế Hệ Sống Mở', author: 'Nhiều Tác Giả', price: '99.000', old_price: '120.000', discount: 18, img: 'https://placehold.co/400x600/EF4444/FFFFFF?text=Gen+Z' },
+                    { title: 'Trí Tuệ Cảm Xúc 2.0', author: 'Travis Bradberry', price: '110.000', old_price: '140.000', discount: 21, img: 'https://placehold.co/400x600/F59E0B/FFFFFF?text=Tri+Tue' },
+                    { title: 'Luật Hấp Dẫn', author: 'Rhonda Byrne', price: '88.000', old_price: '110.000', discount: 20, img: 'https://placehold.co/400x600/14B8A6/FFFFFF?text=Luat+Hap+Dan' },
+                    { title: 'Sức Mạnh Của Sự Tĩnh Lặng', author: 'Ryan Holiday', price: '115.000', old_price: '145.000', discount: 21, img: 'https://placehold.co/400x600/1D4ED8/FFFFFF?text=Suc+Manh' }
+                ],
+                literature: [
+                    { title: 'Tội Ác và Hình Phạt', author: 'Fyodor Dostoevsky', price: '150.000', old_price: '180.000', discount: 17, img: 'https://placehold.co/400x600/10B981/FFFFFF?text=Toi+Ac' },
+                    { title: 'Rừng Na Uy', author: 'Haruki Murakami', price: '129.000', old_price: '160.000', discount: 19, img: 'https://placehold.co/400x600/059669/FFFFFF?text=Rung+Na+Uy' },
+                    { title: 'Trăm Năm Cô Đơn', author: 'Gabriel Garcia Marquez', price: '145.000', old_price: '185.000', discount: 22, img: 'https://placehold.co/400x600/78350F/FFFFFF?text=Tram+Nam+Co+Don' },
+                ],
+                kids: [
+                    { title: 'Dế Mèn Phiêu Lưu Ký', author: 'Tô Hoài', price: '55.000', old_price: '70.000', discount: 21, img: 'https://placehold.co/400x600/2563EB/FFFFFF?text=De+Men' },
+                    { title: 'Kính Vạn Hoa', author: 'Nguyễn Nhật Ánh', price: '89.000', old_price: '110.000', discount: 19, img: 'https://placehold.co/400x600/4F46E5/FFFFFF?text=Kinh+Van+Hoa' },
+                    { title: 'Đồng Dao Cho Bé', author: 'Nhiều tác giả', price: '40.000', old_price: '50.000', discount: 20, img: 'https://placehold.co/400x600/DC2626/FFFFFF?text=Dong+Dao' }
+                ]
+            };
+
+            function populateBooks(sectionId, bookList) {
+                const container = document.getElementById(sectionId);
+                if (!container) return;
+                const template = document.getElementById('book-section-template').innerHTML;
+                let allBooksHtml = '';
+
+                bookList.forEach(book => {
+                    let bookHtml = template
+                        .replace('BOOK_IMAGE', book.img)
+                        .replace(/BOOK_TITLE/g, book.title)
+                        .replace('BOOK_AUTHOR', book.author)
+                        .replace('BOOK_PRICE', book.price)
+                        .replace('BOOK_OLD_PRICE', book.old_price)
+                        .replace('BOOK_DISCOUNT', book.discount);
+                    allBooksHtml += bookHtml;
+                });
+
+                container.innerHTML = allBooksHtml;
+            }
+
+            populateBooks('flash-sale-books', books.flashSale);
+            populateBooks('bestsellers', books.bestsellers);
+            populateBooks('new-releases', books.newReleases);
+            populateBooks('literature-books', books.literature);
+            populateBooks('kids-books', books.kids);
+
+            // Countdown timer
+            function startCountdown() {
+                const countdownElement = document.getElementById('countdown');
+                if (!countdownElement) return;
+
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+
+                let targetTime = new Date();
+                targetTime.setHours(targetTime.getHours() + 2); // 2 hours from now
+
+                function update() {
+                    const now = new Date().getTime();
+                    const distance = targetTime - now;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        hoursEl.textContent = '00';
+                        minutesEl.textContent = '00';
+                        secondsEl.textContent = '00';
+                        return;
+                    }
+                    
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    hoursEl.textContent = String(hours).padStart(2, '0');
+                    minutesEl.textContent = String(minutes).padStart(2, '0');
+                    secondsEl.textContent = String(seconds).padStart(2, '0');
+                }
+                update();
+                const interval = setInterval(update, 1000);
+            }
+            startCountdown();
+
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('hidden');
+                } else {
+                    backToTopButton.classList.add('hidden');
+                }
+            });
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+
+</body>
+</html>
